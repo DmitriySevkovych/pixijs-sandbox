@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixi.js using CDN</title>
+</head>
+
+<body>
+    <!-- HTML -->
+    <canvas id="mycanvas"></canvas>
+
+    <!-- Load PIXI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.2.1/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-filters@latest/dist/pixi-filters.js"></script>
+
+    <!-- Code -->
+    <script>
+        const canvas = document.getElementById('mycanvas');
+
+        const app = new PIXI.Application({
+            view: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+
+        const catTexture = PIXI.Texture.from('img/cat.png');
+        const catSprite = new PIXI.Sprite(catTexture);
+        app.stage.addChild(catSprite);
+
+        const catDotFilterSprite = new PIXI.Sprite(catTexture);
+        catDotFilterSprite.x = app.renderer.width / 2;
+        catDotFilterSprite.y = app.renderer.height / 2;
+        catDotFilterSprite.anchor.set(0.5);
+        catDotFilterSprite.filters = [new PIXI.filters.DotFilter()]
+        app.stage.addChild(catDotFilterSprite);
+
+        app.ticker.add(animate);
+
+        let delta = 0;
+        function animate() {
+            delta += 0.001;
+            catDotFilterSprite.filters[0].scale = 1 + Math.sin(delta);
+        }
+    </script>
+</body>
+
+</html>

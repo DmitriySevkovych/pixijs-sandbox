@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixi.js using npm</title>
+</head>
+
+<body>
+    <!-- HTML -->
+    <canvas id="mycanvas"></canvas>
+
+    <!-- Code -->
+    <script type="module">
+        // Load PIXI
+        import * as PIXI from 'pixi.js'
+
+        // Use PIXI
+        const canvas = document.getElementById('mycanvas');
+
+        const app = new PIXI.Application({
+            view: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+
+        const catTexture = PIXI.Texture.from('img/cat.png');
+        const catSprite = new PIXI.Sprite(catTexture);
+
+        app.stage.addChild(catSprite);
+    </script>
+</body>
+
+</html>
